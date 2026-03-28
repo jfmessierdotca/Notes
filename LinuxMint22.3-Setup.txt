@@ -1,6 +1,6 @@
 
 
-# install VMware Workstation
+# install The VMware Workstation
 #
 # install VMware tools open version:
 $ sudo apt update
