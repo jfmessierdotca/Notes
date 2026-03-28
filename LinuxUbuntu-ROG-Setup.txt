@@ -1,0 +1,95 @@
+- install VMware Workstation
+- setup Thunderbird
+- setup the connection to samba server 192.168.50.14
+- setup the shortcut within the file manager
+- setup the bluetooth
+$ sudo add-apt-repository ppa:wasta-linux/cinnamon-testing
+$ sudo apt-get update
+$ sudo apt-get install openssh-server clementine seahorse kleopatra nemo-seahorse git samba -y
+
+#
+# install packages for the webcam
+$ sudo apt-get install guvcview -y
+$ git clone https://github.com/soyersoyer/cameractrls.git
+$ sudo apt install libturbojpeg
+# Test with the command:       ./cameractrls/cameractrlsgtk.py
+$ mkdir -p ~/.local/bin/ && mv cameractrls/ ~/.local/bin/
+$ cd ~/.local/bin/
+# The following is a one-liner. Copy & paste AS-IS to the shell
+$ cd cameractrls
+desktop-file-install --dir="$HOME/.local/share/applications" \
+--set-icon="$PWD/images/icon_256.png" \
+--set-key=Exec --set-value="$PWD/cameractrlsgtk.py" \
+--set-key=Path --set-value="$PWD" \
+cameractrls.desktop
+#
+
+# other tools..................... 
+$ cd /data/download/4KDownload.com/
+$ sudo apt-get install ./4kyoutubetomp3_4.6.7-1_amd64.deb -y
+$ sudo apt-get install ./4kvideodownloader_4.22.2-1_amd64.deb -y
+# Put the registration infos. Get from Bitwarden
+$ sudo apt install -y asunder lame
+
+
+# Install VMWare
+$ cd /data/download/VMware
+$ sudo ./VMware-Workstation-Full-16.X.####.x86_64.bundle
+
+# install KDE games
+$ sudo apt install kdegames
+
+
+# enable the snap store
+$ sudo mv /etc/apt/preferences.d/nosnap.pref ~/Documents/nosnap.backup
+$ sudo apt update
+$ sudo apt install snapd -y
+$ sudo snap install core
+# add the following to /etc/fstab:
+
+  //192.168.50.14/JF on /samba type cifs
+
+#enable auto-login 
+- Start "Login Window" - Enter password
+- Click Users Tab
+- Make sure the "Delay before connection" is set to blank (not zero)
+
+#disable screen lock
+- Start "Screensaver"
+- Adjust the delay
+- Uncheck the two lock options
+
+#install the Variety WallPaper Changer from the Software Manager (not the command line)
+
+# Change the Fn keys on the Apple Keyboard
+$ echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
+$ sudo update-initramfs -u -k all
+$ sudo reboot
+
+# Install Adobe Acrobat Reader
+# 1. Download the Debian package
+$ wget -O ~/adobe.deb ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
+# 2. Enable i386 Architecture
+$ sudo dpkg --add-architecture i386
+$ sudo apt update
+# 3. Install the Prerequisites
+$ sudo apt install libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 libgdk-pixbuf-xlib-2.0-0:i386 -y
+# 4. Install the reader itself
+$ sudo dpkg -i ~/adobe.deb
+# 5. Create the icon (Verify the command)
+$ cp -R /opt/Adobe/Reader9/Resource/Icons/* ~/.local/share/icons/hicolor
+# Put the following in the file named ~/.local/share/applications/acroread.desktop :
+ [Desktop Entry]
+ Name=Acrobat Reader
+ Exec=acroread
+ Type=Application
+ Icon=adobe.pdf.png
+<EOF>
+
+# create / insert the following into ~/.bash_aliases
+
+#Restore the files under .ssh from the ./.ssh directory
+
+
+
+

@@ -1,0 +1,10 @@
+Mint Installation on hardware
+a54dc880-4ae7-41e1-95f1-4d0740f6290d /dev/nvme1n1p5 on /home type xfs (rw,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+6240a5c8-f675-484a-938f-828a90badc6f /dev/nvme1n1p6 on / type xfs (rw,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+
+448EBEF48EBEDD9C                     /dev/nvme1n1p4 on /windows type fuseblk (ro,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096)
+ad5e081e-c851-4180-9268-cee06c8d4995 /dev/nvme0n1p5 on /data2 type ext4 (rw,relatime)
+0112e082-4bda-4019-bbc1-c4b416f662d7 /dev/sdb1 on /vm2 type ext4 (rw,relatime)
+301dae03-1156-4842-94ae-0ba1c1059b1a /dev/sda1 on /vm type ext4 (rw,relatime)
+7ca5353f-cc3f-468b-b478-ec1472c1c8cf /dev/sdd1 on /data type ext4 (rw,relatime)
+92910713-d573-4627-b4c5-9bedd7419475 /dev/sdd2 on /ISO type ext4 (rw,relatime)

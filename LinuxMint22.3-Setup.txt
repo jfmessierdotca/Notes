@@ -1,0 +1,209 @@
+
+
+# install VMware Workstation
+#
+# install VMware tools open version:
+$ sudo apt update
+$ sudo apt install open-vm-tools open-vm-tools-desktop -y
+#
+# setup Thunderbird
+# setup the connection to samba server 192.168.50.14
+# setup the shortcut within the file manager
+# setup the bluetooth
+
+$ sudo apt-get install openssh-server clementine seahorse kleopatra nemo-seahorse git samba -y
+
+# install ms-ttf-corefonts
+$ sudo apt-get install ttf-mscorefonts-installer
+
+# install Brave browser:
+$ sudo apt install apt-transport-https curl -y
+$ sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+$ echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+$ sudo apt update
+$ sudo apt install brave-browser -y
+
+#
+# install packages for the webcam
+$ sudo apt-get install guvcview -y
+$ git clone https://github.com/soyersoyer/cameractrls.git
+$ sudo apt install lib
+# Test with the command:       ./cameractrls/cameractrlsgtk.py
+$ mkdir -p ~/.local/bin/ && mv cameractrls/ ~/.local/bin/
+$ cd ~/.local/bin/
+# The following is a one-liner. Copy & paste AS-IS to the shell
+$ cd cameractrls
+desktop-file-install --dir="$HOME/.local/share/applications" \
+--set-icon="$PWD/images/icon_256.png" \
+--set-key=Exec --set-value="$PWD/cameractrlsgtk.py" \
+--set-key=Path --set-value="$PWD" \
+cameractrls.desktop
+#
+
+# other tools..................... 
+$ cd /data/download/4KDownload.com/
+$ sudo apt-get install ./4kyoutubetomp3_4.6.7-1_amd64.deb -y
+$ sudo apt-get install ./4kvideodownloader_4.22.2-1_amd64.deb -y
+# Put the registration infos. Get from Bitwarden
+$ sudo apt install -y asunder lame
+
+
+# Install VMWare
+$ cd /data/download/VMware
+$ sudo ./VMware-Workstation-Full-16.X.####.x86_64.bundle
+
+# install KDE games
+$ sudo apt install kdegames -y 
+
+# Install some nice terminal utilities
+$ sudo apt install btop ranger lsd tldr -y
+
+# enable the snap store
+$ sudo mv /etc/apt/preferences.d/nosnap.pref ~/Documents/nosnap.backup
+$ sudo apt update
+$ sudo apt install snapd -y
+$ sudo snap install core
+
+#enable auto-login 
+- Start "Login Window" - Enter password
+- Click Users Tab
+- Make sure the "Delay before connection" is set to blank (not zero)
+
+#disable screen lock
+- Start "Screensaver"
+- Adjust the delay
+- Uncheck the two lock options
+
+#install the Variety WallPaper Changer from the Software Manager (not the command line)
+
+# Change the Fn keys on the Apple Keyboard
+$ echo options hid_apple fnmode=2 | sudo tee -a /etc/modprobe.d/hid_apple.conf
+$ sudo update-initramfs -u -k all
+$ sudo reboot
+
+# Install Adobe Acrobat Reader
+# 1. Download the Debian package
+$ wget -O ~/adobe.deb ftp://ftp.adobe.com/pub/adobe/reader/unix/9.x/9.5.5/enu/AdbeRdr9.5.5-1_i386linux_enu.deb
+# 2. Enable i386 Architecture
+$ sudo dpkg --add-architecture i386
+$ sudo apt update
+# 3. Install the Prerequisites
+$ sudo apt install libxml2:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libatk-adaptor:i386 libgdk-pixbuf-xlib-2.0-0:i386 -y
+# 4. Install the reader itself
+$ sudo dpkg -i ~/adobe.deb
+# 5. Create the icon (Verify the command)
+$ cp -R /opt/Adobe/Reader9/Resource/Icons/* ~/.local/share/icons/hicolor
+# Put the following in the file named ~/.local/share/applications/acroread.desktop :
+ [Desktop Entry]
+ Name=Acrobat Reader
+ Exec=acroread
+ Type=Application
+ Icon=adobe.pdf.png
+<EOF>
+
+
+#Restore the files under .ssh from the ./.ssh directory
+
+# Install the Beautyline
+# go into the appropriate directory
+$ cd /usr/share/icons
+# become root
+$ sudo su
+# unzip the file, from /data (for example)
+$ tar -zxvf /data/BeautyLine.tar.gz
+#
+# Select the newly created theme from Cinnamon or other Desktop
+
+# Setup Logitech Solaar
+$ sudo add-apt-repository ppa:solaar-unifying/stable
+$ sudo apt-get update
+$ sudo apt install solaar
+
+#Setup Flameshot as a screen capture
+$ sudo apt install flameshot -y
+# Then, update the keyboard binding by:
+# start -> Preferences -> Keyboard
+# Click Shortcuts
+# Pick the PrtSc (or photo) key (Accept to override the binding)
+# Set the command to flameshot -gui
+
+# Install most as a pager
+sudo apt-get update
+sudo apt-get install most -y
+# Set PAGER environment variable (example for bash/zsh)
+echo 'export PAGER=most' >> ~/.bashrc
+source ~/.bashrc
+
+# Install ncal and cal as quick calendaring utils
+sudo apt install ncal -y
+
+
+BEGIN----- snap_scrub.sh
+
+#!/bin/bash
+# This script will remove disabled snap revisions.
+set -eu
+
+
+LANG=C snap list --all | awk '/disabled/{print $1, $3}' |
+    while read name rev; do
+        snap remove "$name" --revision="$rev"
+    done
+
+END----- snap_scrub.sh
+
+#!/bin/bash
+#
+# This will install the Gradia tool to quickly annotate and edit screenshots.
+#
+sudo snap install gradia -y
+
+#
+# This will install the Proton Authenticator
+#
+wget https://proton.me/download/authenticator/linux/ProtonAuthenticator_1.0.0_amd64.deb
+sudo apt-get install ./ProtonAuthenticator_1.0.0_amd64.deb -y 
+
+#
+# This will install the kid3 MP3 tag editor
+#
+sudo add-apt-repository ppa:ufleisch/kid3
+sudo apt-get update
+sudo apt-get install kid3     # KDE users
+sudo apt-get install kid3-qt  # without KDE dependencies
+sudo apt-get install kid3-cli # for the command-line interface
+
+
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+
+# / was on /dev/nvme0n1p4 during installation
+UUID=5e4cf868-cd84-477c-be99-61d3b912e530 /               xfs     defaults        0       0
+
+# /boot/efi was on /dev/nvme0n1p1 during installation
+UUID=43C0-BF52  /boot/efi       vfat    umask=0077      0       1
+
+# /data was on /dev/sdd1 during installation
+UUID=7ca5353f-cc3f-468b-b478-ec1472c1c8cf /data           ext4    defaults        0       2
+
+# /vm was on /dev/sda1 during installation
+UUID=045d3a0e-752d-47d6-97db-3107e0779013 /vm             xfs     defaults        0       0
+
+# /ISO was on /dev/sdd2 during installation - JF
+UUID=92910713-d573-4627-b4c5-9bedd7419475 /ISO            ext4    defaults        0       2
+
+# /home was /dev/nvme0n1p3 during installation - JF
+UUID=53f95c55-75a6-4042-9644-a2b5cdd5edb4 /home           xfs     defaults        0       0
+
+UUID=d84af037-2bc0-40ea-aaf5-5c58a20cc22c /Arcade         xfs     defaults        0       0
+
+/swapfile                                 none            swap    sw              0       0
+
+//192.168.50.14/JF /samba cifs            uid=0,credentials=/home/jf/.smb,iocharset=utf8,vers=3.0,noperm 0 0
+//192.168.50.14/dixtera /dixtera cifs     uid=0,credentials=/home/jf/.smb,iocharset=utf8,vers=3.0,noperm 0 0
+
