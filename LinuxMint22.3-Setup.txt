@@ -1,4 +1,4 @@
-
+This file was edited within GitKraken
 
 # install The VMware Workstation
 #
