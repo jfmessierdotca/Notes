@@ -1,3 +1,4 @@
+
 - install VMware Workstation
 - setup Thunderbird
 - setup the connection to samba server 192.168.50.14
